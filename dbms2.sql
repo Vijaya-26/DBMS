@@ -3,7 +3,7 @@ use vijbanking;
 CREATE TABLE branch(branch_name char(30), branch_city char(30), assets real, PRIMARY KEY(branch_name));
 CREATE TABLE bank_account(accno int, branch_name char(30), balance real, PRIMARY KEY(accno), FOREIGN KEY(branch_name) REFERENCES branch(branch_name));
 CREATE TABLE bank_customer(customer_name char(30), customer_street char(30), customer_city char(30), primary key(customer_name));
-CREATE TABLE depositor(customer_name char(30), accno int, FOREIGN KEY(accno) REFERENCES bank_account(accno),FOREIGN KEY(customer_name) REFERENCES bank_customer(customer_name));
+CREATE TABLE depositor(customer_name char(30), accno int, FOREIGN KEY(accno) REFERENCES bank_account(accno) on delete cascade,FOREIGN KEY(customer_name) REFERENCES bank_customer(customer_name) on delete cascade);
 CREATE TABLE loan(loan_number int, branch_name char(30), amount real, PRIMARY KEY(loan_number), FOREIGN KEY(branch_name) REFERENCES branch(branch_name));
 
 INSERT INTO branch values('SBI_Basvangudi', 'Bangalore', 50000);
